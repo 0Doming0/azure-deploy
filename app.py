@@ -9,10 +9,13 @@ socket = SocketIO(app)
 
 app.register_blueprint(api)
 
+data = {}
+
 data_app = {}
 
 @app.route("/")
 def home():
+    
     return render_template("/home.html")
 
 @app.route("/now")
