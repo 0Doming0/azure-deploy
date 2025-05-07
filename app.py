@@ -1,7 +1,8 @@
 from flask import Flask, render_template
-import socketio
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
+socket = SocketIO(app)
 
 @app.route("/")
 def home():
