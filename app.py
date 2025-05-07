@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 from routes import api
 import time
@@ -17,9 +17,9 @@ def home():
 def now():
     return time.strftime("%H:%M")
 
-@app.route("/somar")
-def soma():
-    return somar(10, 23)
+@app.route("/receive", methods=["POST"])
+def receive_():
+    return request.json
 
 # if __name__ == '__main__':
 #   app.run("0.0.0.0")
