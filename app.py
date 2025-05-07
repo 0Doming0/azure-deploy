@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-from api import api
+from routes import api
 import time
 
 app = Flask(__name__)
