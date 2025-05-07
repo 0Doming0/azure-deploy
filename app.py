@@ -9,17 +9,26 @@ socket = SocketIO(app)
 
 app.register_blueprint(api)
 
+data_app = {}
+
 @app.route("/")
 def home():
     return render_template("/home.html")
 
 @app.route("/now")
 def now():
-    return time.strftime("%H:%M")
+    if data_app == {}:
+      return time.strftime("%H:%M")
+    return data_app["message"]
 
 @app.route("/receive", methods=["POST"])
 def receive_():
-    return request.json
+    data = request.get_json()
+    if data and 'id' in data:
+       data_app["message"] = data  
+       return '', 200
+    return '', 403
 
-# if __name__ == '__main__':
-#   app.run("0.0.0.0")
+data_app = {}
+if __name__ == '__main__':
+  app.run("0.0.0.0")
